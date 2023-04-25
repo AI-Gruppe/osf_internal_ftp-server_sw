@@ -1,19 +1,23 @@
-ftpd:
-    build: .
-    ports:
-        - "20-21:20-21"
-        - "65500-65515:65500-65515"
-    environment:
-        - ANON_ROOT=/var/ftp
-        - MAX_PORT=65515
-        - MIN_PORT=65500
-        - MAX_PER_IP=2
-        - MAX_LOGIN_FAILS=2
-        - MAX_CLIENTS=50
-        - MAX_RATE=6250000
-        - FTPD_BANNER="Welcome to the Skunkforce LAN FTP Server"
-        - WRITE_ENABLE=YES
-        - ANONYMOUS_ENABLE=YES
-        - ANON_UPLOAD_ENABLE=NO
-    volumes:
-        - "/tmp:/var/ftp:ro"
+volumes:
+  ftp_data:
+
+services:
+  ftpd:
+      build: .
+      ports:
+          - "20-21:20-21"
+          - "65500-65515:65500-65515"
+      environment:
+          - ANON_ROOT=/var/ftp
+          - MAX_PORT=65515
+          - MIN_PORT=65500
+          - MAX_PER_IP=2
+          - MAX_LOGIN_FAILS=2
+          - MAX_CLIENTS=50
+          - MAX_RATE=6250000
+          - FTPD_BANNER="Welcome to the Skunkforce LAN FTP Server"
+          - WRITE_ENABLE=YES
+          - ANONYMOUS_ENABLE=YES
+          - ANON_UPLOAD_ENABLE=NO
+      volumes:
+          - ftp_data:/var/ftp
